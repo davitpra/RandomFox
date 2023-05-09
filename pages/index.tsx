@@ -1,9 +1,11 @@
 import Head from 'next/head'
+import { NextPage } from 'next';
 import { RandomFox } from '@/components/RandomFox'
 
+const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
-
-export default function Home() {
+const Home: NextPage = () => {
+  const image = `https://randomfox.ca/images/${randomNumber()}.jpg`;
   return (
     <>
       <Head>
@@ -14,8 +16,10 @@ export default function Home() {
       </Head>
       <main >
         <h1 className='text-xl text-blue-500'> Hola Davidcito</h1>
-        <RandomFox />
+        <RandomFox image ={image} alt= {`imagen de zorro ${randomNumber()}`}/>
       </main>
     </>
   )
 }
+
+export default Home;

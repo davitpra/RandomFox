@@ -1,14 +1,21 @@
-// Generates a random number between 1 and 122
-const randomNumber = () => Math.floor(Math.random() * 122) + 1;
+// RandomFox.tsx
+type Props = {
+    image: string;
+    alt: string;
+    // another prop
+  };
 
-export function RandomFox(): JSX.Element {
-  const image = `https://randomfox.ca/images/${randomNumber()}.jpg`;
+// las props son como un objeto tipado
+export function RandomFox({ image, alt }: Props): JSX.Element {
+// Lo que hicimos fue desestructurar el objeto props para 
+// quedarnos solo con lo que necesitamos (image y alt)
 
   return (
     <img
       width="320"
       height="auto"
       src={image}
+      alt={alt}
       className="mx-auto rounded-md bg-gray-300"
     />
   );
