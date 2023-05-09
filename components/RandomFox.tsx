@@ -7,8 +7,6 @@ type Props = {
 
 // las props son como un objeto tipado
 export function RandomFox({ image, alt }: Props): JSX.Element {
-// Lo que hicimos fue desestructurar el objeto props para 
-// quedarnos solo con lo que necesitamos (image y alt)
 
   return (
     <img
