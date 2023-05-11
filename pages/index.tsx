@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import { NextPage } from 'next';
-import { RandomFox } from '@/components/RandomFox'
 import { useState } from "react";
 
 import type { MouseEventHandler } from "react"
+import { LazyImage } from '@/components/LazyImage';
 
 // generate simple unique id
 const generateId = (): string => {
@@ -44,11 +44,21 @@ const Home: NextPage = () => {
       </Head>
       <main >
         <h1 className='text-3xl font-bold underline'> Holaaaa Davidcito</h1>
+
         <button onClick={addNewFox}> Add new fox</button>
+
         {images.map(({id, url}) => (
           <div key={id} className="p-4">
-            <RandomFox image={url} alt={`fox`}/>
+            {/* podemos definir las funcionalidades de img sin tener que definir los tipos */}
+            <LazyImage 
+              src={url}
+              width={320}
+              height="auto"
+              title='Random Fox'
+              onClick={()=>console.log('hay un error te tipo')}
+            />
           </div>
+
         ))}
       </main>
     </>
