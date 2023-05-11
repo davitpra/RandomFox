@@ -34,6 +34,8 @@ const Home: NextPage = () => {
       ...images,
       newImageItem
     ])
+
+    window.plausible("Singup")
   }
 
   return (
@@ -43,7 +45,13 @@ const Home: NextPage = () => {
         <meta name="description" content="To go in deep of TypeScript and React" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          defer
+          data-domain="yourdomain.com"
+          src="https://plausible.io/js/script.js"
+        ></script>
       </Head>
+
       <main >
         <h1 className='text-3xl font-bold underline'> Holaaaa Davidcito</h1>
 
