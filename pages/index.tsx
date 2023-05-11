@@ -47,7 +47,7 @@ const Home: NextPage = () => {
 
         <button onClick={addNewFox}> Add new fox</button>
 
-        {images.map(({id, url}) => (
+        {images.map(({id, url}, index) => (
           <div key={id} className="p-4">
             {/* podemos definir las funcionalidades de img sin tener que definir los tipos */}
             <LazyImage 
@@ -56,10 +56,13 @@ const Home: NextPage = () => {
               height="auto"
               title='Random Fox'
               onClick={()=>console.log('hay un error te tipo')}
+              onLazyLoad={(img) => {
+                console.log(`Image #${index + 1} cargada. Nodo:`, img);
+              }}
             />
           </div>
-
         ))}
+
       </main>
     </>
   )

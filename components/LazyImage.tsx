@@ -1,27 +1,33 @@
 import {useRef, useEffect, useState} from 'react'
-/* Importamos el tipo de dato que nos aparece cuando hacemos hover cualquiera
-de los eventos de image (como aprendimos antes) */
 import type { ImgHTMLAttributes } from "react"
 
-// Creamos dos nuevos tipos de datos
-type LazyImageProps = { src: string }
+type LazyImageProps = { 
+  src: string
+  onLazyLoad?: (img: HTMLImageElement) => void
+}
 type ImageNativeTypes = ImgHTMLAttributes<HTMLImageElement>
 
-// Los sumamos, haciendo que estos sean un solo tipo de dato
 type Props = LazyImageProps & ImageNativeTypes
 
-//img props se convierte en un objeto con todas las propiedades de img
-export function LazyImage ({ src,...imgProps }: Props): JSX.Element {
+export function LazyImage ({ src, onLazyLoad,...imgProps }: Props): JSX.Element {
   const node = useRef<HTMLImageElement>(null); 
   const [fox, setFox] = useState<string> (
     "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
   );
+  // creamos el estado de carga
+  const [Loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setFox(src);
+          if (node.current) {
+            onLazyLoad && onLazyLoad(node.current)
+            observer.disconnect()
+          }
+          // cambiamos el estado de carga
+          setLoading(true)
         }
       });
     });
@@ -31,16 +37,15 @@ export function LazyImage ({ src,...imgProps }: Props): JSX.Element {
     return () => {
       observer.disconnect();
     };
-  }, [src]);
+    // se carga cada vez que cambie src, el onLazyLoad o el Loading
+  }, [src, onLazyLoad,Loading]);
   
-//  todas las propiedades que recibe un img soportan automática e implícitamente 
   return (
     
     <img
       ref = {node}
       src={fox}
       className="w-80 h-auto rounded-lg bg-gray-300"
-      //le pasamos todas la props
       {...imgProps}
     />
   );
