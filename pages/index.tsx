@@ -15,16 +15,14 @@ const generateId = (): string => {
 // random number from 1 to 122
 const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
-type ImageItem ={id:string, url:string}
-
 const Home: NextPage = () => {
 
-  const [images, setImages] = useState<Array<ImageItem>>([]);
+  const [images, setImages] = useState<Array<IFoxImageItem>>([]);
 
   const addNewFox:MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault()
 
-    const newImageItem: ImageItem = {
+    const newImageItem: IFoxImageItem = {
       id:generateId(),
        url:`https://randomfox.ca/images/${randomNumber()}.jpg` 
       }
