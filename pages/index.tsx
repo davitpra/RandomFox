@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { MouseEventHandler } from "react"
 import { LazyImage } from '@/components/LazyImage';
 
+
 // generate simple unique id
 const generateId = (): string => {
   return (
@@ -12,8 +13,11 @@ const generateId = (): string => {
     Math.random().toString(36).substring(2, 15)
   );
 };
+
+import {random} from 'lodash'
+
 // random number from 1 to 122
-const randomNumber = () => Math.floor(Math.random() * 122) + 1;
+const randomNumber = () => random(1, 123)
 
 const Home: NextPage = () => {
 
