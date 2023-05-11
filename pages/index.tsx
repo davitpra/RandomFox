@@ -52,11 +52,11 @@ const Home: NextPage = () => {
         ></script>
       </Head>
 
-      <main >
-        <h1 className='text-3xl font-bold underline'> Holaaaa Davidcito</h1>
+      <main className='flex flex-col items-center'>
+        <h1 className='text-3xl font-bold underline m-2 mt-2'> Ramdom Fox</h1>
 
-        <button onClick={addNewFox}> Add new fox</button>
-
+        <button onClick={addNewFox} className='bg-blue-300 rounded-md h-auto w-40 m-2'> Add new fox</button>
+        <article className='grid grid-cols-3 gap-4 content-center'>
         {images.map(({id, url}, index) => (
           <div key={id} className="p-4">
             {/* podemos definir las funcionalidades de img sin tener que definir los tipos */}
@@ -65,6 +65,7 @@ const Home: NextPage = () => {
               width={320}
               height="auto"
               title='Random Fox'
+              className=''
               onClick={()=>console.log('hay un error te tipo')}
               onLazyLoad={(img) => {
                 console.log(`Image #${index + 1} cargada. Nodo:`, img);
@@ -72,6 +73,7 @@ const Home: NextPage = () => {
             />
           </div>
         ))}
+        </article>
 
       </main>
     </>
